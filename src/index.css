@@ -1,1 +1,167 @@
 @import "tailwindcss";
+
+/* ── Base resets ─────────────────────────────────────────── */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: "DM Sans", sans-serif;
+    background-color: #f5f3ef;
+    color: #0a0a0a;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Syne", sans-serif;
+    font-weight: 700;
+  }
+}
+
+/* ── Utility classes ─────────────────────────────────────── */
+@layer utilities {
+  .font-display {
+    font-family: "Syne", sans-serif;
+  }
+
+  /* Staggered animation helpers */
+  .delay-75 {
+    animation-delay: 75ms;
+  }
+  .delay-150 {
+    animation-delay: 150ms;
+  }
+  .delay-225 {
+    animation-delay: 225ms;
+  }
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+  .delay-375 {
+    animation-delay: 375ms;
+  }
+
+  /* Grain texture overlay */
+  .grain::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* Smooth checkbox */
+  .todo-check {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #c2c2c2;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+  }
+
+  .todo-check:checked {
+    background-color: #ff5c35;
+    border-color: #ff5c35;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 10'%3E%3Cpath d='M1 5l3.5 3.5L11 1' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+
+/* ── Scrollbar styling ───────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+::-webkit-scrollbar-thumb {
+  background: #c2c2c2;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a3a3a3;
+}
+
+/* ── Toast overrides ─────────────────────────────────────── */
+.react-hot-toast > div {
+  font-family: "DM Sans", sans-serif !important;
+}
+
+@theme {
+  /* ── Fonts ─────────────────────────────────────────── */
+  --font-display: "Syne", sans-serif;
+  --font-body: "DM Sans", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* ── Colors: zinc ──────────────────────────────────── */
+  --color-zinc-50: #f0f0f0;
+  --color-zinc-100: #e0e0e0;
+  --color-zinc-200: #c2c2c2;
+  --color-zinc-300: #a3a3a3;
+  --color-zinc-400: #858585;
+  --color-zinc-500: #666666;
+  --color-zinc-600: #4a4a4a;
+  --color-zinc-700: #333333;
+  --color-zinc-800: #1f1f1f;
+  --color-zinc-900: #0a0a0a;
+
+  /* ── Colors: accent ────────────────────────────────── */
+  --color-accent: #ff5c35;
+  --color-accent-light: #ff7a5a;
+  --color-accent-dark: #cc3d1f;
+
+  /* ── Colors: surface ───────────────────────────────── */
+  --color-surface: #f5f3ef;
+  --color-surface-card: #faf9f7;
+  --color-surface-dark: #1a1917;
+
+  /* ── Shadows ───────────────────────────────────────── */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover:
+    0 4px 12px rgba(0, 0, 0, 0.12), 0 8px 32px rgba(0, 0, 0, 0.08);
+  --shadow-brutal: 4px 4px 0px #0a0a0a;
+
+  /* ── Animations ────────────────────────────────────── */
+  --animate-fade-up: fadeUp 0.4s ease forwards;
+  --animate-spin-slow: spin 2s linear infinite;
+  --animate-pulse-dot: pulseDot 1.4s ease-in-out infinite;
+
+  /* ── Keyframes ─────────────────────────────────────── */
+  @keyframes fadeUp {
+    0% {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulseDot {
+    0%,
+    80%,
+    100% {
+      transform: scale(0);
+      opacity: 0.5;
+    }
+    40% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+}
